@@ -98,7 +98,7 @@ action :join do
       Rename-Computer -NewName '#{newcomputername}'
     }
     sleep 5
-    Add-computer -DomainName #{new_resource.domain} #{new_resource.ou.nil? ? '' : '-OUPath "' + new_resource.ou + '"'} #{new_resource.server.nil? ? '' : '-Server "' + new_resource.server + '"'} -Credential $credential -force -PassThru #-Restart
+    Add-computer -DomainName #{new_resource.domain} #{new_resource.ou.nil? ? '' : '-OUPath "' + new_resource.ou + '"'} #{new_resource.server.nil? ? '' : '-Server "' + new_resource.server + '"'} -Credential $credential -force -Options JoinWithNewName -PassThru #-Restart
 
     # Old way, somtimes Domain controller busy error occured
     # Add-Computer  #{newcomputername} -DomainName #{new_resource.domain} -OUPath #{new_resource.ou} -Credential $credential -Restart -PassThru
